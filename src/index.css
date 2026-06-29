@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --font-inter: 'Inter', system-ui, sans-serif;
+    --font-playfair: 'Playfair Display', Georgia, serif;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-charcoal antialiased;
+    background-image: theme('backgroundImage.wood-grain');
+  }
+
+  ::selection {
+    @apply bg-caramel/25 text-charcoal;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply px-5 sm:px-8 lg:px-12 xl:px-16;
+  }
+
+  .section-pad {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-coffee;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-10 bg-caramel/50;
+  }
+
+  .card-surface {
+    @apply rounded-3xl border border-border bg-white shadow-soft;
+  }
+
+  .overlay-warm {
+    @apply bg-espresso/75;
+  }
+
+  .menu-section {
+    @apply py-10 md:py-14 lg:py-0;
+  }
+
+  .menu-section-header {
+    @apply mb-8 text-center md:mb-10;
+  }
+
+  .menu-section-title {
+    @apply font-display text-3xl font-bold tracking-tight text-espresso md:text-4xl;
+  }
+
+  .menu-section-subtitle {
+    @apply mt-2 text-sm italic text-muted md:text-base;
+  }
+
+  .menu-section-items {
+    @apply space-y-6 md:space-y-7;
+  }
+
+  .menu-section-divider {
+    @apply mt-10 border-0 border-t border-border md:mt-14;
+  }
+
+  .menu-entry-row {
+    @apply grid items-baseline gap-x-3;
+    grid-template-columns: minmax(0, auto) 1fr auto;
+  }
+
+  .menu-entry-name {
+    @apply font-display text-lg font-semibold text-espresso md:text-xl;
+  }
+
+  .menu-entry-leader {
+    @apply mb-1 min-w-[2rem] border-b border-dotted border-muted/40;
+  }
+
+  .menu-entry-price {
+    @apply whitespace-nowrap font-display text-lg font-semibold tabular-nums text-coffee md:text-xl;
+  }
+
+  .menu-entry-description {
+    @apply mt-1.5 text-sm leading-relaxed text-muted;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
