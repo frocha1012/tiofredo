@@ -38,13 +38,6 @@ export interface SocialLink {
   icon: 'instagram' | 'facebook'
 }
 
-export interface Testimonial {
-  id: string
-  quote: string
-  author: string
-  role: string
-}
-
 export interface AboutHighlight {
   id: string
   title: string

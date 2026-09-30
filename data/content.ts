@@ -8,8 +8,6 @@ import type {
 
   Specialty,
 
-  Testimonial,
-
   AboutHighlight,
 
 } from '@/types'
@@ -339,94 +337,6 @@ export const footerLinks = [
   { label: 'Contactos', href: '/#contactos' },
 
 ]
-
-
-
-export const testimonials = {
-
-  eyebrow: 'Testemunhos',
-
-  title: 'Opiniões dos nossos clientes',
-
-  subtitle:
-
-    'Histórias de quem partilha connosco a mesa — pizza, tradição e um ambiente que convida a ficar.',
-
-  items: [
-
-    {
-
-      id: '1',
-
-      quote:
-
-        'A massa da pizza tem aquele sabor caseiro que faz toda a diferença. Serviço atencioso e um salão acolhedor — ideal para jantar em família.',
-
-      author: 'Ana Ferreira',
-
-      role: 'Cliente habitual',
-
-    },
-
-    {
-
-      id: '2',
-
-      quote:
-
-        'Surpreendeu-nos a variedade da ementa: pizza excelente e pratos portugueses muito bem executados. Voltámos na semana seguinte.',
-
-      author: 'Miguel Santos',
-
-      role: 'Visita em grupo',
-
-    },
-
-    {
-
-      id: '3',
-
-      quote:
-
-        'Ambiente descontraído, porções generosas e uma equipa que nos fez sentir em casa. Recomendo sem hesitar.',
-
-      author: 'Catarina Oliveira',
-
-      role: 'Jantar de aniversário',
-
-    },
-
-    {
-
-      id: '4',
-
-      quote:
-
-        'A pizza estava excelente e o bacalhau surpreendeu-nos pela qualidade. Voltaremos com toda a certeza.',
-
-      author: 'João Ribeiro',
-
-      role: 'Visita em família',
-
-    },
-
-    {
-
-      id: '5',
-
-      quote:
-
-        'Take away impecável e comida quente. Perfeito para levar para casa depois de um dia na região.',
-
-      author: 'Sofia Martins',
-
-      role: 'Take away',
-
-    },
-
-  ] satisfies Testimonial[],
-
-}
 
 
 
