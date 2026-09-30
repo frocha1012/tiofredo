@@ -1,15 +1,17 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { company, hero } from '@/data/content'
-import { fadeUp, staggerContainer } from '@/lib/motion'
+import { fadeUp, lineReveal, staggerContainer } from '@/lib/motion'
 import { hasContactPhone } from '@/lib/utils'
 import CTAButton from '@/components/ui/CTAButton'
 import AppImage from '@/components/ui/AppImage'
+import { RevealImage } from '@/components/motion/Reveal'
 
 export default function HeroSection() {
+  const reduce = useReducedMotion()
   const { scrollY } = useScroll()
-  const imageY = useTransform(scrollY, [0, 600], [0, 120])
-  const contentY = useTransform(scrollY, [0, 600], [0, 60])
-  const opacity = useTransform(scrollY, [0, 400], [1, 0.4])
+  const imageY = useTransform(scrollY, [0, 900], reduce ? [0, 0] : [0, 160])
+  const contentY = useTransform(scrollY, [0, 700], reduce ? [0, 0] : [0, 70])
+  const opacity = useTransform(scrollY, [0, 500], [1, 0.35])
   const hasPhone = hasContactPhone(company.phoneRaw)
   const reserveHref = hasPhone ? `tel:${company.phoneRaw}` : '/#contactos'
 
@@ -19,13 +21,15 @@ export default function HeroSection() {
       className="relative flex min-h-[100svh] items-end overflow-hidden"
       aria-label="Apresentação"
     >
-      <motion.div style={{ y: imageY }} className="absolute inset-0">
-        <AppImage
-          src={hero.image}
-          alt={hero.imageAlt}
-          fill
-          priority
-        />
+      <motion.div style={{ y: imageY }} className="absolute inset-x-0 -top-[18%] -bottom-[22%]">
+        <RevealImage immediate>
+          <AppImage
+            src={hero.image}
+            alt={hero.imageAlt}
+            fill
+            priority
+          />
+        </RevealImage>
       </motion.div>
 
       <div className="absolute inset-0 bg-espresso/55" />
@@ -37,7 +41,7 @@ export default function HeroSection() {
       >
         <motion.div
           variants={staggerContainer(0.12, 0.3)}
-          initial="hidden"
+          initial={reduce ? 'visible' : 'hidden'}
           animate="visible"
           className="max-w-3xl"
         >
@@ -49,13 +53,22 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.h1
-            variants={fadeUp}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.08 } },
+            }}
             className="font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
           >
             {hero.headline.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
+              <motion.span
+                key={line}
+                variants={{ hidden: {}, visible: {} }}
+                className="-my-[0.08em] block overflow-hidden py-[0.08em]"
+              >
+                <motion.span variants={lineReveal} className="block">
+                  {line}
+                </motion.span>
+              </motion.span>
             ))}
           </motion.h1>
 

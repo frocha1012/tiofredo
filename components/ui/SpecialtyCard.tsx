@@ -1,4 +1,5 @@
 import AppImage from '@/components/ui/AppImage'
+import { RevealImage } from '@/components/motion/Reveal'
 import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Specialty } from '@/types'
@@ -21,12 +22,14 @@ export default function SpecialtyCard({
         className,
       )}
     >
-      <AppImage
-        src={specialty.image}
-        alt={specialty.title}
-        fill
-        className="object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.04]"
-      />
+      <RevealImage className="absolute inset-0">
+        <AppImage
+          src={specialty.image}
+          alt={specialty.title}
+          fill
+          className="object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.04]"
+        />
+      </RevealImage>
       <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/25 to-transparent" />
 
       <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">

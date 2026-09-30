@@ -1,3 +1,4 @@
+import { RevealHeading } from '@/components/motion/Reveal'
 import { cn } from '@/lib/utils'
 
 interface SectionHeaderProps {
@@ -36,14 +37,14 @@ export default function SectionHeader({
           {eyebrow}
         </p>
       )}
-      <h2
+      <RevealHeading
         className={cn(
           'font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl',
           light ? 'text-white' : 'text-espresso',
         )}
       >
         {title}
-      </h2>
+      </RevealHeading>
       {subtitle && (
         <p
           className={cn(

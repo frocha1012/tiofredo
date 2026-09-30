@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useLenis } from 'lenis/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { company, navLinks } from '@/data/content'
@@ -22,6 +23,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
+  const lenis = useLenis()
   const isHome = pathname === '/'
   const hasPhone = hasContactPhone(company.phoneRaw)
   const reserveHref = hasPhone ? `tel:${company.phoneRaw}` : '/#contactos'
@@ -35,10 +37,15 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
+    if (lenis) {
+      if (open) lenis.stop()
+      else lenis.start()
+    }
     return () => {
       document.body.style.overflow = ''
+      lenis?.start()
     }
-  }, [open])
+  }, [open, lenis])
 
   useEffect(() => {
     setOpen(false)

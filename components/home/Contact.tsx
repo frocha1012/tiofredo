@@ -131,7 +131,10 @@ export default function ContactSection() {
 
           <FadeInWhenVisible delay={0.15}>
             {company.mapsEmbedUrl ? (
-              <div className="overflow-hidden rounded-3xl border border-border shadow-card">
+              <div
+                className="overflow-hidden rounded-3xl border border-border shadow-card"
+                data-lenis-prevent
+              >
                 <iframe
                   title="Localização da Pizzaria Tio Fredo"
                   src={company.mapsEmbedUrl}

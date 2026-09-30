@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { Pizza, Users, Wine } from 'lucide-react'
 import AppImage from '@/components/ui/AppImage'
 import CTAButton from '@/components/ui/CTAButton'
@@ -8,6 +8,7 @@ import FadeInWhenVisible, {
   FadeInItem,
   FadeInStagger,
 } from '@/components/motion/FadeInWhenVisible'
+import { RevealHeading, RevealImage } from '@/components/motion/Reveal'
 import { hasContactPhone } from '@/lib/utils'
 import type { AboutHighlight } from '@/types'
 
@@ -38,22 +39,25 @@ function FeatureRow({ highlight }: { highlight: AboutHighlight }) {
 }
 
 function AboutImage({ src, alt }: { src: string; alt: string }) {
+  const reduce = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   })
-  const y = useTransform(scrollYProgress, [0, 1], ['3%', '-3%'])
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['12%', '-12%'])
 
   return (
     <div
       ref={ref}
       className="relative min-h-[22rem] overflow-hidden rounded-4xl sm:min-h-[26rem] lg:h-full lg:min-h-[38rem]"
     >
-      <motion.div style={{ y }} className="absolute inset-[-6%] will-change-transform">
-        <AppImage src={src} alt={alt} fill />
-      </motion.div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-espresso/10 lg:bg-gradient-to-r lg:from-espresso/15 lg:via-transparent lg:to-transparent" />
+      <RevealImage className="absolute inset-0">
+        <motion.div style={{ y }} className="absolute inset-[-16%] will-change-transform">
+          <AppImage src={src} alt={alt} fill />
+        </motion.div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-espresso/10 lg:bg-gradient-to-r lg:from-espresso/15 lg:via-transparent lg:to-transparent" />
+      </RevealImage>
     </div>
   )
 }
@@ -69,9 +73,9 @@ export default function AboutSection() {
           <FadeInWhenVisible className="order-2 flex flex-col justify-center lg:order-1 lg:py-6 xl:py-10">
             <p className="eyebrow mb-8 lg:mb-10">{about.eyebrow}</p>
 
-            <h2 className="font-display text-4xl font-bold leading-[1.08] tracking-tight text-espresso sm:text-[2.75rem] lg:text-5xl xl:text-[3.25rem]">
+            <RevealHeading className="font-display text-4xl font-bold leading-[1.08] tracking-tight text-espresso sm:text-[2.75rem] lg:text-5xl xl:text-[3.25rem]">
               {about.title}
-            </h2>
+            </RevealHeading>
 
             <p className="mt-8 max-w-md text-lg leading-[1.8] text-muted lg:mt-10 lg:text-xl lg:leading-[1.75]">
               {about.description}
