@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, Phone, X } from 'lucide-react'
 import { company, navLinks } from '@/data/content'
 import { EASE } from '@/lib/motion'
 import { cn, hasContactPhone } from '@/lib/utils'
@@ -105,6 +105,7 @@ export default function Navbar() {
               className="!px-5 !py-2.5 !text-xs"
               external={hasPhone}
             >
+              <Phone className="h-3.5 w-3.5" />
               Reservar Mesa
             </CTAButton>
           </div>
