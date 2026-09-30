@@ -7,6 +7,7 @@ import { company, navLinks } from '@/data/content'
 import { EASE } from '@/lib/motion'
 import { cn, hasContactPhone } from '@/lib/utils'
 import CTAButton from '@/components/ui/CTAButton'
+import OpenMark from '@/components/layout/OpenMark'
 
 function parseNavHref(href: string) {
   const hashIndex = href.indexOf('#')
@@ -70,15 +71,18 @@ export default function Navbar() {
           className="container-px mx-auto flex max-w-7xl items-center justify-between py-4 md:py-5"
           aria-label="Navegação principal"
         >
-          <Link
-            to="/"
-            className={cn(
-              'font-display text-xl font-bold tracking-tight transition-colors md:text-2xl',
-              transparent ? 'text-white' : 'text-espresso',
-            )}
-          >
-            {company.shortName}
-          </Link>
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+            <Link
+              to="/"
+              className={cn(
+                'font-display text-xl font-bold tracking-tight transition-colors md:text-2xl',
+                transparent ? 'text-white' : 'text-espresso',
+              )}
+            >
+              {company.shortName}
+            </Link>
+            <OpenMark light={transparent} />
+          </div>
 
           <ul className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
