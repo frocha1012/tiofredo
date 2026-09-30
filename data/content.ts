@@ -164,6 +164,8 @@ export const specialties: Specialty[] = [
 
     id: 'pizza',
 
+    href: '/menu#pizzas',
+
     title: 'Pizzas',
 
     description: 'Cerca de 28 variedades de pizza artesanal — a especialidade da casa.',
@@ -177,6 +179,8 @@ export const specialties: Specialty[] = [
   {
 
     id: 'portuguese',
+
+    href: '/menu#portuguese',
 
     title: 'Cozinha Portuguesa',
 
@@ -192,6 +196,8 @@ export const specialties: Specialty[] = [
 
     id: 'fish',
 
+    href: '/menu#fish',
+
     title: 'Peixe',
 
     description: 'Bacalhau e outros pratos de peixe preparados com rigor.',
@@ -205,6 +211,8 @@ export const specialties: Specialty[] = [
   {
 
     id: 'steaks',
+
+    href: '/menu#meat',
 
     title: 'Carnes',
 
@@ -220,6 +228,8 @@ export const specialties: Specialty[] = [
 
     id: 'pasta',
 
+    href: '/menu#pasta',
+
     title: 'Massas',
 
     description: 'Massas clássicas italianas, da cozinha tradicional à casa.',
@@ -233,6 +243,8 @@ export const specialties: Specialty[] = [
   {
 
     id: 'desserts',
+
+    href: '/menu#desserts',
 
     title: 'Sobremesas',
 

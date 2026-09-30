@@ -23,6 +23,7 @@ export interface Specialty {
   title: string
   description: string
   image: string
+  href: string
 }
 
 export interface Feature {

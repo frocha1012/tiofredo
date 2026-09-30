@@ -55,7 +55,7 @@
   }
 
   .menu-section {
-    @apply py-10 md:py-14 lg:py-0;
+    @apply scroll-mt-24 py-10 md:py-14 lg:py-0;
   }
 
   .menu-section-header {

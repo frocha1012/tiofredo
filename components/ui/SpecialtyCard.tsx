@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import AppImage from '@/components/ui/AppImage'
 import { RevealImage } from '@/components/motion/Reveal'
 import { ArrowUpRight } from 'lucide-react'
@@ -16,9 +17,11 @@ export default function SpecialtyCard({
   featured = false,
 }: SpecialtyCardProps) {
   return (
-    <article
+    <Link
+      to={specialty.href}
+      aria-label={`Ver ${specialty.title} na ementa`}
       className={cn(
-        'group relative h-full min-h-[220px] overflow-hidden rounded-3xl border border-border bg-white shadow-soft transition-all duration-500 ease-premium hover:-translate-y-1 hover:shadow-elevated',
+        'group relative block h-full min-h-[220px] overflow-hidden rounded-3xl border border-border bg-white shadow-soft transition-all duration-500 ease-premium hover:-translate-y-1 hover:shadow-elevated',
         className,
       )}
     >
@@ -57,7 +60,7 @@ export default function SpecialtyCard({
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
 
