@@ -3,8 +3,6 @@ import { useLocation } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import type Lenis from 'lenis'
 
-const NAV_OFFSET = -96
-
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
@@ -19,11 +17,12 @@ function scrollToLocation(
     const element = document.getElementById(id)
     if (element) {
       if (lenis) {
-        lenis.scrollTo(element, { offset: NAV_OFFSET, immediate })
+        lenis.scrollTo(element, { immediate })
         return
       }
 
-      const top = element.getBoundingClientRect().top + window.scrollY + NAV_OFFSET
+      const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 110
+      const top = element.getBoundingClientRect().top + window.scrollY - padding
       window.scrollTo({
         top: Math.max(0, top),
         behavior: immediate ? 'auto' : 'smooth',
@@ -41,7 +40,7 @@ function scrollToLocation(
 }
 
 export default function ScrollToHash() {
-  const { pathname, hash } = useLocation()
+  const { pathname, hash, state } = useLocation()
   const lenis = useLenis()
   const pathnameRef = useRef<string | null>(null)
 
@@ -52,6 +51,7 @@ export default function ScrollToHash() {
     const previousPath = pathnameRef.current
     const pathChanged = previousPath !== pathname
     pathnameRef.current = pathname
+    if (!pathChanged && state?.preserveScroll) return
     const immediate = previousPath === null || pathChanged || reduced || !hash
     const scroller = reduced ? undefined : lenis
 
@@ -71,7 +71,7 @@ export default function ScrollToHash() {
       window.cancelAnimationFrame(frame)
       window.cancelAnimationFrame(secondFrame)
     }
-  }, [pathname, hash, lenis])
+  }, [pathname, hash, state, lenis])
 
   return null
 }

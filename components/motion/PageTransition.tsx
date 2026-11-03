@@ -14,10 +14,10 @@ export default function PageTransition() {
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location.pathname}
-        initial={reduce ? false : { opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: -12 }}
-        transition={{ duration: reduce ? 0 : 0.55, ease: EASE }}
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={reduce ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: reduce ? 0 : 0.3, ease: EASE }}
       >
         <ScrollToHash />
         <Routes location={location}>

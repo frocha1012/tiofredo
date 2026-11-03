@@ -1,3 +1,4 @@
+import { useLanguage } from '@/lib/i18n'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
@@ -13,6 +14,7 @@ const initialPreferences = {
 }
 
 export default function CookieConsentBanner() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false)
   const [preferences, setPreferences] = useState(initialPreferences)
@@ -76,20 +78,13 @@ export default function CookieConsentBanner() {
       className="cookie-banner"
       role="dialog"
       aria-live="polite"
-      aria-label="Preferências de cookies"
+      aria-label={t("Preferências de cookies")}
     >
       <div className="cookie-banner-content">
-        <h3>Preferências de Cookies</h3>
-        <p>
-          Utilizamos cookies essenciais para o funcionamento do site e, mediante o
-          seu consentimento, cookies para estatísticas e marketing. Pode aceitar,
-          recusar os opcionais, ou personalizar as suas preferências.
-        </p>
-        <p className="cookie-banner-link-line">
-          Consulte a nossa{' '}
-          <Link to="/politica-de-cookies" onClick={closeBanner}>
-            Política de Cookies
-          </Link>
+        <h3>{t("Preferências de Cookies")}</h3>
+        <p>{t("Utilizamos cookies essenciais para o funcionamento do site e, mediante o seu consentimento, cookies para estatísticas e marketing. Pode aceitar, recusar os opcionais, ou personalizar as suas preferências.")}</p>
+        <p className="cookie-banner-link-line">{t("Consulte a nossa")}{' '}
+          <Link to="/politica-de-cookies" onClick={closeBanner}>{t("Política de Cookies")}</Link>
           .
         </p>
 
@@ -97,21 +92,21 @@ export default function CookieConsentBanner() {
           <div className="cookie-options">
             <label className="cookie-option">
               <span>
-                <strong>Cookies estritamente necessários</strong>
-                <small>Sempre ativos para segurança e funcionalidades essenciais.</small>
+                <strong>{t("Cookies estritamente necessários")}</strong>
+                <small>{t("Sempre ativos para segurança e funcionalidades essenciais.")}</small>
               </span>
               <input
                 type="checkbox"
                 checked
                 readOnly
-                aria-label="Cookies estritamente necessários"
+                aria-label={t("Cookies estritamente necessários")}
               />
             </label>
 
             <label className="cookie-option">
               <span>
-                <strong>Cookies analíticos</strong>
-                <small>Ajudam-nos a compreender como os visitantes utilizam o site.</small>
+                <strong>{t("Cookies analíticos")}</strong>
+                <small>{t("Ajudam-nos a compreender como os visitantes utilizam o site.")}</small>
               </span>
               <input
                 type="checkbox"
@@ -124,10 +119,8 @@ export default function CookieConsentBanner() {
 
             <label className="cookie-option">
               <span>
-                <strong>Cookies de marketing</strong>
-                <small>
-                  Utilizados para campanhas e conteúdos promocionais personalizados.
-                </small>
+                <strong>{t("Cookies de marketing")}</strong>
+                <small>{t("Utilizados para campanhas e conteúdos promocionais personalizados.")}</small>
               </span>
               <input
                 type="checkbox"
@@ -146,22 +139,18 @@ export default function CookieConsentBanner() {
           type="button"
           className="cookie-secondary-button"
           onClick={rejectOptionalCookies}
-        >
-          Recusar opcionais
-        </button>
+        >{t("Recusar opcionais")}</button>
         <button
           type="button"
           className="cookie-secondary-button"
           onClick={() => setIsCustomizeOpen(true)}
-        >
-          Personalizar
-        </button>
+        >{t("Personalizar")}</button>
         <button
           type="button"
           className="cookie-primary-button"
           onClick={isCustomizeOpen ? saveCustomPreferences : acceptAllCookies}
         >
-          {isCustomizeOpen ? 'Guardar preferências' : 'Aceitar todos'}
+          {t(isCustomizeOpen ? 'Guardar preferências' : 'Aceitar todos')}
         </button>
       </div>
     </aside>

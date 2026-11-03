@@ -5,9 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatPrice(price: number | null | undefined): string {
+export function formatPrice(price: number | null | undefined, locale = 'pt-PT'): string {
   if (price == null) return '—'
-  return new Intl.NumberFormat('pt-PT', {
+  return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: 'EUR',
   }).format(price)
