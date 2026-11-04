@@ -9,7 +9,14 @@ export interface MenuItem {
   name: string
   description?: string
   price: number | null
+  priceMax?: number
+  variants?: { label: string; price: number }[]
+  chefRecommended?: boolean
+  group?: string
+  allergens?: AllergenId[]
 }
+
+export type AllergenId = 'gluten' | 'crustaceans' | 'eggs' | 'fish' | 'peanuts' | 'soy' | 'milk' | 'nuts' | 'celery' | 'mustard' | 'sesame' | 'sulphites' | 'molluscs' | 'lupin'
 
 export interface MenuCategory {
   id: string

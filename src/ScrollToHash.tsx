@@ -16,13 +16,18 @@ function scrollToLocation(
     const id = decodeURIComponent(hash.replace('#', ''))
     const element = document.getElementById(id)
     if (element) {
+      const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 110
+      const menuToolbar = window.matchMedia('(max-width: 639px)').matches && element.closest('.menu-editorial')
+        ? document.querySelector('.menu-browse-bar') : null
+      const offset = menuToolbar
+        ? (document.querySelector('.site-header')?.getBoundingClientRect().height ?? 79) + menuToolbar.getBoundingClientRect().height + 12
+        : padding
       if (lenis) {
-        lenis.scrollTo(element, { immediate })
+        lenis.scrollTo(element, { immediate, offset: padding - offset })
         return
       }
 
-      const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 110
-      const top = element.getBoundingClientRect().top + window.scrollY - padding
+      const top = element.getBoundingClientRect().top + window.scrollY - offset
       window.scrollTo({
         top: Math.max(0, top),
         behavior: immediate ? 'auto' : 'smooth',

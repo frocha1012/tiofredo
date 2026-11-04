@@ -4,6 +4,7 @@ import App from './App'
 import './index.css'
 import './fonts.css'
 import './remodel.css'
+import './menu.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

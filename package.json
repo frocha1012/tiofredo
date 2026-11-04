@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite --port 5174",
     "build": "tsc -b && vite build",
+    "test": "node --test tests/client-menu.test.ts",
     "preview": "vite preview",
     "lint": "tsc --noEmit"
   },

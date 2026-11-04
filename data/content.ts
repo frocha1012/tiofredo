@@ -44,9 +44,12 @@ export const company = {
 
   schedule: {
 
-    weekdays: 'Seg–Sex: 08h00–01h00',
+    weekdays: 'Seg–Sex: 10h30–01h00',
 
-    weekend: 'Sáb: 11h30–01h00 · Dom: 11h00–01h00',
+    weekend: 'Sáb, Dom e feriados: 11h00–01h00',
+    weekdayHours: '10h30 — 01h00',
+    weekendHours: '11h00 — 01h00',
+    kitchenHours: '11h00 — 00h30',
 
     note: 'Take away disponível. Horário sujeito a alterações.',
 
@@ -180,7 +183,7 @@ export const specialties: Specialty[] = [
 
     id: 'portuguese',
 
-    href: '/menu#portuguese',
+    href: '/menu#meat',
 
     title: 'Cozinha Portuguesa',
 

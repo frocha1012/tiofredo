@@ -1,11 +1,32 @@
+import { menuTranslations } from './client-menu'
+import { allergenTranslations } from './menu-allergens'
+
 // Portuguese is the source language. Restaurant and dish identities stay intact.
 const entries: [string, string, string][] = [
   ['Idioma', 'Language', 'Langue'],
+  ['Alergénios e símbolos', 'Allergens and symbols', 'Allergènes et symboles'],
+  ['Ver legenda', 'View key', 'Voir la légende'],
+  ['Preferência do chefe', 'Chef’s choice', 'Préférence du chef'],
+  ['Símbolos da ementa original. A ausência de um símbolo não indica que o prato esteja isento de alergénios. Consulte a nossa equipa sobre alergias e intolerâncias.', 'Symbols from the original menu. The absence of a symbol does not mean a dish is free from allergens. Please ask our team about allergies and intolerances.', 'Symboles de la carte originale. L’absence de symbole ne signifie pas qu’un plat est exempt d’allergènes. Renseignez-vous auprès de notre équipe en cas d’allergie ou d’intolérance.'],
   ['Pizzaria & Restaurante em Ponte da Barca', 'Pizzeria & Restaurant in Ponte da Barca', 'Pizzeria & Restaurant à Ponte da Barca'],
   ['Pizzas artesanais, cozinha portuguesa e boa companhia no coração de Ponte da Barca. Conheça o Tio Fredo e reserve a sua mesa.', 'Artisan pizzas, Portuguese cooking and good company in the heart of Ponte da Barca. Discover Tio Fredo and book your table.', 'Pizzas artisanales, cuisine portugaise et bons moments au cœur de Ponte da Barca. Découvrez Tio Fredo et réservez votre table.'],
   ['PIZZARIA & RESTAURANTE', 'PIZZERIA & RESTAURANT', 'PIZZERIA & RESTAURANT'],
   ['A nossa casa', 'Our restaurant', 'Notre restaurant'],
   ['A ementa', 'The menu', 'La carte'],
+  ['A nossa', 'Our', 'Notre'],
+  ['ementa.', 'menu.', 'carte.'],
+  ['Pizzaria', 'Pizzeria', 'Pizzeria'],
+  ['Da cozinha', 'From the kitchen', 'La cuisine'],
+  ['Para acompanhar', 'To accompany', 'Pour accompagner'],
+  ['Encontre o seu favorito.', 'Find your favourite.', 'Trouvez votre favori.'],
+  ['Pesquisar na ementa', 'Search the menu', 'Rechercher sur la carte'],
+  ['Fechar pesquisa', 'Close search', 'Fermer la recherche'],
+  ['Resultados da pesquisa', 'Search results', 'Résultats de recherche'],
+  ['Escolha uma categoria', 'Choose a category', 'Choisir une catégorie'],
+  ['Feito com gosto. Servido com alma.', 'Made with care. Served with heart.', 'Préparé avec passion. Servi avec le cœur.'],
+  ['A mesa está posta.', 'The table is set.', 'La table est prête.'],
+  ['Falta a sua', 'All we need is your', 'Il ne manque que votre'],
+  ['companhia.', 'company.', 'compagnie.'],
   ['Ementa', 'Menu', 'Carte'],
   ['Pizzas, massas, carnes, peixe e pratos da cozinha portuguesa — uma seleção dos sabores do Tio Fredo.', 'Pizza, pasta, meat, fish and Portuguese cooking — a selection of Tio Fredo flavours.', 'Pizzas, pâtes, viandes, poissons et cuisine portugaise — une sélection des saveurs de Tio Fredo.'],
   ['À sua mesa', 'At your table', 'À votre table'],
@@ -118,6 +139,14 @@ const entries: [string, string, string][] = [
   ['A mesa é em sua casa?', 'Eating at home?', 'À table chez vous ?'],
   ['Encomende por telefone e venha levantar.', 'Order by phone and collect your meal.', 'Commandez par téléphone et venez chercher votre repas.'],
   ['ESPECIALIDADE DA CASA', 'HOUSE SPECIALITY', 'SPÉCIALITÉ MAISON'],
+  ['Sugestão do chefe', 'Chef’s recommendation', 'Suggestion du chef'],
+  ['Ementa de julho de 2026', 'July 2026 menu', 'Carte de juillet 2026'],
+  ['Ver ementa original (PDF)', 'View original menu (PDF)', 'Voir la carte originale (PDF)'],
+  ['IVA incluído à taxa legal em vigor. Para informações sobre alergénios e intolerâncias alimentares, contacte a nossa equipa.', 'VAT included at the applicable rate. Please ask our team about allergens and food intolerances.', 'TVA incluse au taux en vigueur. Pour les allergènes et les intolérances alimentaires, renseignez-vous auprès de notre équipe.'],
+  ['Fins de semana e feriados', 'Weekends and public holidays', 'Week-ends et jours fériés'],
+  ['Cozinha · todos os dias', 'Kitchen · every day', 'Cuisine · tous les jours'],
+  ['Bacalhau à Tio Fredo, posta e os sabores da tradição que nos sabem a casa.', 'Tio Fredo salt cod, thick-cut steak and traditional flavours that feel like home.', 'Morue Tio Fredo, pièce de bœuf et saveurs traditionnelles qui nous rappellent la maison.'],
+  ['Entradas, pizzas, massas, carnes e peixe. Há lugar para todos os gostos.', 'Starters, pizza, pasta, meat and fish. Something for everyone.', 'Entrées, pizzas, pâtes, viandes et poissons. Il y en a pour tous les goûts.'],
   ['Ainda não encontrámos esse sabor.', 'We couldn’t find that dish.', 'Nous n’avons pas trouvé ce plat.'],
   ['Experimente outro nome ou explore a ementa completa.', 'Try another name or explore the full menu.', 'Essayez un autre nom ou parcourez toute la carte.'],
   ['Ver todos os pratos', 'See all dishes', 'Voir tous les plats'],
@@ -240,6 +269,8 @@ const entries: [string, string, string][] = [
   ['Café', 'Coffee', 'Café'],
 ]
 
-export const translations: Record<string, { en: string; fr: string }> = Object.fromEntries(
-  entries.map(([pt, en, fr]) => [pt, { en, fr }]),
-)
+export const translations: Record<string, { en: string; fr: string }> = {
+  ...Object.fromEntries(entries.map(([pt, en, fr]) => [pt, { en, fr }])),
+  ...menuTranslations,
+  ...allergenTranslations,
+}
