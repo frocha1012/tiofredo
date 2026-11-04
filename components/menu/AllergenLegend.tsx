@@ -4,7 +4,7 @@ import AllergenIcon from './AllergenIcon'
 
 export default function AllergenLegend() {
   const { t } = useLanguage()
-  return <details className="menu-allergen-legend">
+  return <details className="menu-allergen-legend" open>
     <summary><span>{t('Alergénios e símbolos')}</span><span className="menu-legend-hint">{t('Ver legenda')}</span></summary>
     <div className="menu-legend-content">
       <p>{t('Símbolos da ementa original. A ausência de um símbolo não indica que o prato esteja isento de alergénios. Consulte a nossa equipa sobre alergias e intolerâncias.')}</p>
