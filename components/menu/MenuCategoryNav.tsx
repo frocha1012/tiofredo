@@ -3,9 +3,8 @@ import { useLanguage } from '@/lib/i18n'
 import { menuCategories } from '@/data/menu'
 
 const sections = [
-  { label: 'Pizzaria', ids: ['pizzas', 'calzones', 'pasta'] },
-  { label: 'Da cozinha', ids: ['starters', 'salads', 'meat', 'fish', 'francesinhas', 'burgers', 'omelettes', 'sandwiches', 'sides', 'extras'] },
-  { label: 'Para acompanhar', ids: ['drinks', 'wines'] },
+  { label: 'À sua mesa', categories: menuCategories.filter(category => !['drinks', 'wines'].includes(category.id)) },
+  { label: 'Para acompanhar', categories: menuCategories.filter(category => ['drinks', 'wines'].includes(category.id)) },
 ]
 
 export default function MenuCategoryNav({ selected, searching, onSelect, allFirst = false }: {
@@ -19,9 +18,8 @@ export default function MenuCategoryNav({ selected, searching, onSelect, allFirs
     {allFirst && all}
     {sections.map(section => <div className="menu-index-group" key={section.label}>
       <p>{t(section.label)}</p>
-      {section.ids.map(id => {
-        const category = menuCategories.find(category => category.id === id)!
-        return <button key={id} type="button" aria-pressed={!searching && selected === id} onClick={() => onSelect(id)}>
+      {section.categories.map(category => {
+        return <button key={category.id} type="button" aria-pressed={!searching && selected === category.id} onClick={() => onSelect(category.id)}>
           <span>{t(category.title)}</span><Check className="menu-category-check" size={14} aria-hidden="true" />
         </button>
       })}
