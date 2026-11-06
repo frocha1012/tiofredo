@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Check } from 'lucide-react'
 import { useLanguage } from '@/lib/i18n'
 import { menuCategories } from '@/data/menu'
 
@@ -13,7 +13,7 @@ export default function MenuCategoryNav({ selected, searching, onSelect, allFirs
 }) {
   const { t } = useLanguage()
   const all = <button type="button" className="menu-index-all" aria-pressed={!searching && selected === 'all'} onClick={() => onSelect('all')}>
-    <span>{t('A ementa toda')}</span><ArrowUpRight size={13} />
+    <span>{t('A ementa toda')}</span>{!searching && selected === 'all' ? <Check size={16} aria-hidden="true" /> : <ArrowUpRight size={16} aria-hidden="true" />}
   </button>
   return <nav aria-label={t('Categorias da ementa')}>
     {allFirst && all}
@@ -22,7 +22,7 @@ export default function MenuCategoryNav({ selected, searching, onSelect, allFirs
       {section.ids.map(id => {
         const category = menuCategories.find(category => category.id === id)!
         return <button key={id} type="button" aria-pressed={!searching && selected === id} onClick={() => onSelect(id)}>
-          <span>{t(category.title)}</span><span>{String(category.items.length).padStart(2, '0')}</span>
+          <span>{t(category.title)}</span><Check className="menu-category-check" size={14} aria-hidden="true" />
         </button>
       })}
     </div>)}

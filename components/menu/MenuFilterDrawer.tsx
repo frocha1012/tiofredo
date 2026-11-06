@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { createPortal } from 'react-dom'
-import { ArrowRight, ChevronLeft, Search, SlidersHorizontal, X } from 'lucide-react'
+import { ArrowRight, Search, SlidersHorizontal, X } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { useLanguage } from '@/lib/i18n'
 import MenuCategoryNav from './MenuCategoryNav'
 
-export default function MenuFilterDrawer({ query, onQueryChange, selected, count, onSelect, onReveal }: {
-  query: string; onQueryChange: (query: string) => void; selected: string; count: number
+export default function MenuFilterDrawer({ query, onQueryChange, selected, onSelect, onReveal }: {
+  query: string; onQueryChange: (query: string) => void; selected: string
   onSelect: (id: string) => void; onReveal: () => void
 }) {
   const { t } = useLanguage()
@@ -60,7 +60,7 @@ export default function MenuFilterDrawer({ query, onQueryChange, selected, count
         }
         gesture.current = null
       }} onPointerCancel={() => { gesture.current = null }}>
-      <SlidersHorizontal size={17} /><span>{t('Filtrar')}</span><ChevronLeft size={14} />
+      <SlidersHorizontal size={17} /><span>{t('Filtrar')}</span>
       {query.trim() && <i className="menu-filter-dot" aria-hidden="true" />}
     </button>
     <dialog ref={dialog} id="menu-filters" className="menu-filter-drawer" aria-labelledby="menu-filters-title" data-lenis-prevent
@@ -94,7 +94,6 @@ export default function MenuFilterDrawer({ query, onQueryChange, selected, count
         setDrag(0); gesture.current = null
       }}
       onPointerCancel={() => { setDrag(0); gesture.current = null }}>
-      <div className="menu-drawer-grip" aria-hidden="true"><span /></div>
       <div className="menu-drawer-header">
         <div><p className="overline">TIO FREDO</p><h2 id="menu-filters-title">{t('A ementa')}</h2></div>
         <button type="button" className="menu-drawer-close" autoFocus aria-label={t('Fechar filtros')} onClick={close}><X size={22} /></button>
@@ -106,11 +105,10 @@ export default function MenuFilterDrawer({ query, onQueryChange, selected, count
         </label>
       </form>
       <div className="menu-drawer-categories">
-        <p className="menu-drawer-instruction">{t('Escolha uma categoria')}</p>
         <MenuCategoryNav allFirst selected={selected} searching={Boolean(query.trim())} onSelect={id => { dirty.current = true; onSelect(id); close() }} />
       </div>
-      <div className="menu-drawer-footer"><button type="button" className="button" aria-label={`${t('Ver resultados')} (${count})`} onClick={close}>
-        <span>{t('Ver resultados')}<small>{count}</small></span><ArrowRight size={18} />
+      <div className="menu-drawer-footer"><button type="button" className="button" onClick={close}>
+        <span>{t('Ver resultados')}</span><ArrowRight size={18} />
       </button></div>
     </dialog>
   </>, document.body)

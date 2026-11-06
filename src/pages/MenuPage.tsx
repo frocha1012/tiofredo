@@ -28,7 +28,6 @@ export default function MenuPage() {
       ].filter(Boolean).join(' ')).includes(normalize(query.trim()))),
     }))
     .filter(category => category.items.length)
-  const count = categories.reduce((sum, category) => sum + category.items.length, 0)
 
   useEffect(() => { setQuery('') }, [hash])
 
@@ -48,7 +47,7 @@ export default function MenuPage() {
   }
 
   return <main id="conteudo" className="menu-page menu-editorial" tabIndex={-1}>
-    <MenuFilterDrawer query={query} onQueryChange={setQuery} selected={selected} count={count} onSelect={selectCategory} onReveal={revealResults} />
+    <MenuFilterDrawer query={query} onQueryChange={setQuery} selected={selected} onSelect={selectCategory} onReveal={revealResults} />
     <section className="menu-intro page-width">
       <div className="menu-intro-copy">
         <Link to="/" className="menu-return"><ArrowLeft size={14} /> Tio Fredo</Link>
@@ -83,7 +82,7 @@ export default function MenuPage() {
         <div className="menu-book" ref={results}>
           <div className="menu-book-results" aria-live="polite" aria-atomic="true">
             <AllergenLegend />
-            {searching && <div className="menu-search-summary"><p>{count === 1 ? t('1 opção para saborear') : t('{count} opções para saborear', { count })}</p><button type="button" onClick={() => setQuery('')}>{t('Limpar pesquisa')} <X size={14} /></button></div>}
+            {searching && <div className="menu-search-summary"><p>{t('Resultados da pesquisa')}</p><button type="button" onClick={() => setQuery('')}>{t('Limpar pesquisa')} <X size={14} /></button></div>}
             {categories.length ? categories.map(category => <MenuSheet category={category} key={category.id} />) : <div className="menu-search-empty">
               <h2>{t('Ainda não encontrámos esse sabor.')}</h2>
               <p>{t('Experimente outro nome ou explore a ementa completa.')}</p>
