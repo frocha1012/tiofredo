@@ -10,7 +10,7 @@ import { company } from '@/data/content'
 import MenuSheet from '@/components/menu/MenuSheet'
 import AllergenLegend from '@/components/menu/AllergenLegend'
 import MenuCategoryNav from '@/components/menu/MenuCategoryNav'
-import MenuFilterDrawer from '@/components/menu/MenuFilterDrawer'
+import MenuFloatingFilters from '@/components/menu/MenuFloatingFilters'
 
 const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-PT')
 
@@ -98,7 +98,7 @@ export default function MenuPage() {
   }
 
   return <main id="conteudo" className="menu-page menu-editorial" tabIndex={-1}>
-    <MenuFilterDrawer query={query} onQueryChange={changeQuery} selected={selected} onSelect={selectCategory} onReveal={revealResults} />
+    <MenuFloatingFilters query={query} onQueryChange={changeQuery} selected={selected} onSelect={selectCategory} onReveal={revealResults} />
     <section className="menu-intro page-width">
       <div className="menu-intro-copy">
         <Link to="/" className="menu-return"><ArrowLeft size={14} /> Tio Fredo</Link>
