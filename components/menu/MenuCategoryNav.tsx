@@ -12,14 +12,14 @@ export default function MenuCategoryNav({ selected, searching, onSelect, allFirs
 }) {
   const { t } = useLanguage()
   const all = <button type="button" className="menu-index-all" aria-pressed={!searching && selected === 'all'} onClick={() => onSelect('all')}>
-    <span>{t('A ementa toda')}</span>{!searching && selected === 'all' ? <Check size={16} aria-hidden="true" /> : <ArrowUpRight size={16} aria-hidden="true" />}
+    <span>{t('A ementa completa')}</span>{!searching && selected === 'all' ? <Check size={16} aria-hidden="true" /> : <ArrowUpRight size={16} aria-hidden="true" />}
   </button>
   return <nav aria-label={t('Categorias da ementa')}>
     {allFirst && all}
     {sections.map(section => <div className="menu-index-group" key={section.label}>
       <p>{t(section.label)}</p>
       {section.categories.map(category => {
-        return <button key={category.id} type="button" aria-pressed={!searching && selected === category.id} onClick={() => onSelect(category.id)}>
+        return <button key={category.id} type="button" data-filter-tone={menuCategories.indexOf(category) % 2 === 0 ? 'alternate' : 'base'} aria-pressed={!searching && selected === category.id} onClick={() => onSelect(category.id)}>
           <span>{t(category.title)}</span><Check className="menu-category-check" size={14} aria-hidden="true" />
         </button>
       })}

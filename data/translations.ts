@@ -139,7 +139,7 @@ const entries: [string, string, string][] = [
   ['opções para saborear', 'dishes to enjoy', 'plats à savourer'],
   ['À SUA ESCOLHA', 'YOUR CHOICE', 'À VOUS DE CHOISIR'],
   ['Categorias da ementa', 'Menu categories', 'Catégories de la carte'],
-  ['A ementa toda', 'The full menu', 'Toute la carte'],
+  ['A ementa completa', 'The full menu', 'Toute la carte'],
   ['A mesa é em sua casa?', 'Eating at home?', 'À table chez vous ?'],
   ['Encomende por telefone e venha levantar.', 'Order by phone and collect your meal.', 'Commandez par téléphone et venez chercher votre repas.'],
   ['ESPECIALIDADE DA CASA', 'HOUSE SPECIALITY', 'SPÉCIALITÉ MAISON'],
