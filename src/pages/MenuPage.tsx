@@ -6,24 +6,17 @@ import { menuCategories } from '@/data/menu'
 import { company } from '@/data/content'
 import MenuSheet from '@/components/menu/MenuSheet'
 import AllergenLegend from '@/components/menu/AllergenLegend'
+import MenuCategoryNav from '@/components/menu/MenuCategoryNav'
+import MenuFilterDrawer from '@/components/menu/MenuFilterDrawer'
 
 const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-PT')
-const menuSections = [
-  { label: 'Pizzaria', ids: ['pizzas', 'calzones', 'pasta'] },
-  { label: 'Da cozinha', ids: ['starters', 'salads', 'meat', 'fish', 'francesinhas', 'burgers', 'omelettes', 'sandwiches', 'sides', 'extras'] },
-  { label: 'Para acompanhar', ids: ['drinks', 'wines'] },
-]
 
 export default function MenuPage() {
   const { t } = useLanguage()
   const { hash } = useLocation()
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
-  const [searchOpen, setSearchOpen] = useState(false)
   const results = useRef<HTMLDivElement>(null)
-  const toolbar = useRef<HTMLDivElement>(null)
-  const searchInput = useRef<HTMLInputElement>(null)
-  const searchToggle = useRef<HTMLButtonElement>(null)
   const selected = hash === '#all' ? 'all' : menuCategories.some(category => '#' + category.id === hash) ? hash.slice(1) : 'pizzas'
   const searching = Boolean(query.trim())
   const categories = menuCategories
@@ -39,16 +32,11 @@ export default function MenuPage() {
 
   useEffect(() => { setQuery('') }, [hash])
 
-  useEffect(() => {
-    if (!query.trim() || !window.matchMedia('(max-width: 639px)').matches) return
-    const frame = requestAnimationFrame(revealResults)
-    return () => cancelAnimationFrame(frame)
-  }, [query])
-
   function revealResults() {
-    const top = results.current?.getBoundingClientRect().top ?? 0
+    if (!results.current) return
+    const top = results.current.getBoundingClientRect().top
     if (window.matchMedia('(max-width: 639px)').matches) {
-      const offset = (document.querySelector('.site-header')?.getBoundingClientRect().height ?? 79) + (toolbar.current?.getBoundingClientRect().height ?? 66) + 12
+      const offset = (document.querySelector('.site-header')?.getBoundingClientRect().height ?? 79) + 12
       if (top < offset) window.scrollBy({ top: top - offset, behavior: 'instant' })
     } else if (top < 110) results.current?.scrollIntoView({ block: 'start', behavior: 'instant' })
   }
@@ -59,17 +47,8 @@ export default function MenuPage() {
     requestAnimationFrame(revealResults)
   }
 
-  function toggleSearch() {
-    if (searchOpen) {
-      setQuery('')
-      setSearchOpen(false)
-    } else {
-      setSearchOpen(true)
-      requestAnimationFrame(() => searchInput.current?.focus({ preventScroll: true }))
-    }
-  }
-
   return <main id="conteudo" className="menu-page menu-editorial" tabIndex={-1}>
+    <MenuFilterDrawer query={query} onQueryChange={setQuery} selected={selected} count={count} onSelect={selectCategory} onReveal={revealResults} />
     <section className="menu-intro page-width">
       <div className="menu-intro-copy">
         <Link to="/" className="menu-return"><ArrowLeft size={14} /> Tio Fredo</Link>
@@ -87,54 +66,24 @@ export default function MenuPage() {
     </section>
 
     <section className="menu-browse page-width" aria-label={t('Pratos da ementa')}>
-      <div className={'menu-browse-bar' + (searchOpen ? ' menu-search-open' : '')} ref={toolbar}>
+      <div className="menu-browse-bar">
         <div><span className="overline">{t('À SUA ESCOLHA')}</span><p>{t('Encontre o seu favorito.')}</p></div>
-        <label className="menu-mobile-category">
-          <span className="sr-only">{t('Escolha uma categoria')}</span>
-          <select aria-label={t('Escolha uma categoria')} value={searching ? 'search' : selected} onChange={event => selectCategory(event.target.value)}>
-            {searching && <option value="search" disabled>{t('Resultados da pesquisa')}</option>}
-            {menuSections.map(section => <optgroup label={t(section.label)} key={section.label}>
-              {section.ids.map(id => <option key={id} value={id}>{t(menuCategories.find(category => category.id === id)!.title)}</option>)}
-            </optgroup>)}
-            <option value="all">{t('A ementa toda')}</option>
-          </select>
-        </label>
-        <button type="button" className="menu-search-toggle" ref={searchToggle} aria-label={t(searchOpen ? 'Fechar pesquisa' : 'Pesquisar pratos')} aria-expanded={searchOpen} aria-controls="menu-search-field" onClick={toggleSearch}>
-          {searchOpen ? <X size={20} /> : <Search size={20} />}
-        </button>
-        <label className="menu-find" id="menu-search-field">
+        <label className="menu-find">
           <Search size={17} />
-          <input ref={searchInput} type="search" value={query} onChange={event => { setQuery(event.target.value); setSearchOpen(true) }} placeholder={t('Pesquisar na ementa')} aria-label={t('Pesquisar pratos')} onKeyDown={event => {
-            if (event.key === 'Escape' && searchOpen) {
-              setQuery(''); setSearchOpen(false); searchToggle.current?.focus()
-            }
-          }} />
+          <input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t('Pesquisar na ementa')} aria-label={t('Pesquisar pratos')} />
           {query && <button type="button" aria-label={t('Limpar pesquisa')} onClick={() => setQuery('')}><X size={16} /></button>}
         </label>
       </div>
 
       <div className="menu-book-layout">
         <aside className="menu-index" data-lenis-prevent>
-          <nav aria-label={t('Categorias da ementa')}>
-            {menuSections.map(section => <div className="menu-index-group" key={section.label}>
-              <p>{t(section.label)}</p>
-              {section.ids.map(id => {
-                const category = menuCategories.find(category => category.id === id)!
-                return <button key={id} type="button" aria-pressed={!searching && selected === id} onClick={() => selectCategory(id)}>
-                  <span>{t(category.title)}</span><span>{String(category.items.length).padStart(2, '0')}</span>
-                </button>
-              })}
-            </div>)}
-            <button type="button" className="menu-index-all" aria-pressed={!searching && selected === 'all'} onClick={() => selectCategory('all')}>
-              {t('A ementa toda')} <ArrowUpRight size={13} />
-            </button>
-          </nav>
+          <MenuCategoryNav selected={selected} searching={searching} onSelect={selectCategory} />
         </aside>
 
         <div className="menu-book" ref={results}>
           <div className="menu-book-results" aria-live="polite" aria-atomic="true">
             <AllergenLegend />
-            {searching && <p className="menu-search-summary">{count === 1 ? t('1 opção para saborear') : t('{count} opções para saborear', { count })}</p>}
+            {searching && <div className="menu-search-summary"><p>{count === 1 ? t('1 opção para saborear') : t('{count} opções para saborear', { count })}</p><button type="button" onClick={() => setQuery('')}>{t('Limpar pesquisa')} <X size={14} /></button></div>}
             {categories.length ? categories.map(category => <MenuSheet category={category} key={category.id} />) : <div className="menu-search-empty">
               <h2>{t('Ainda não encontrámos esse sabor.')}</h2>
               <p>{t('Experimente outro nome ou explore a ementa completa.')}</p>
