@@ -26,7 +26,7 @@ export default function MenuPage() {
   const controls = useAnimationControls()
   const reduced = useReducedMotion()
   const lenis = useLenis()
-  const selected = hash === '#all' ? 'all' : menuCategories.some(category => '#' + category.id === hash) ? hash.slice(1) : 'pizzas'
+  const selected = menuCategories.some(category => '#' + category.id === hash) ? hash.slice(1) : 'all'
   const searching = Boolean(query.trim())
   const categories = menuCategories
     .filter(category => searching || selected === 'all' || category.id === selected)
