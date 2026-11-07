@@ -156,6 +156,9 @@ main:focus { outline: none; }
 .footer-links { display: grid; grid-template-columns: 1fr 1fr; align-content: center; gap: 24px; }
 .footer-links a { display: flex; align-items: center; gap: 12px; font-size: 11px; color: #e6d8c7; }
 .footer-links a:hover { color: var(--caramel); }
+.footer-links .footer-complaints { grid-column: 1 / -1; justify-content: space-between; min-height: 44px; padding-top: 16px; border-top: 1px solid #f5efe530; color: var(--cream); font-size: 12px; font-weight: 500; line-height: 1.6; }
+.footer-complaints > span { min-width: 0; }
+.footer-complaints > svg { flex-shrink: 0; }
 .footer-location { justify-self: end; padding-top: 7px; }
 .footer-location > span { color: #ddcbb7; font-size: 8px; letter-spacing: .14em; }
 .footer-location p { font-family: var(--font-playfair); font-size: 28px; margin-top: 13px; line-height: 1.2; }

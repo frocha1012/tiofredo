@@ -4,6 +4,7 @@ import { allergenTranslations } from './menu-allergens'
 // Portuguese is the source language. Restaurant and dish identities stay intact.
 const entries: [string, string, string][] = [
   ['Idioma', 'Language', 'Langue'],
+  ['Livro de Reclamações Eletrónico', 'Electronic Complaints Book', 'Livre de réclamations électronique'],
   ['Alergénios e símbolos', 'Allergens and symbols', 'Allergènes et symboles'],
   ['Ver legenda', 'View key', 'Voir la légende'],
   ['Preferência do chefe', 'Chef’s choice', 'Préférence du chef'],
